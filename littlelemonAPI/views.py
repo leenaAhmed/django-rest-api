@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from django.db import IntegrityError
 from django.http import JsonResponse
-from .models import Book
 from django.views.decorators.csrf import csrf_exempt;
 from django.forms.models import model_to_dict
 from rest_framework.response import Response
@@ -9,12 +8,31 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework import viewsets
 from rest_framework.views import APIView
+from rest_framework import generics
+from .models import MenuItem, Book
+from .serializers import MenuItemSerializers
+from django.shortcuts import get_object_or_404
+
+class MenuItemView(generics.ListCreateAPIView):
+      queryset = MenuItem.objects.all()
+      serializer_class = MenuItemSerializers
+
+class SingleMenuItemView(generics.RetrieveUpdateAPIView , generics.DestroyAPIView):
+      queryset = MenuItem.objects.all()
+      serializer_class = MenuItemSerializers()
 
 
-@api_view(['POST'])
-def books(request):
-    return Response('list of books' , status=status.HTTP_200_OK)
+@api_view()
+def menu_items(request):
+    items = MenuItem.objects.all()
+    serializer_items = MenuItemSerializers(items, many=True)
+    return Response(serializer_items.data, status=status.HTTP_200_OK)
 
+@api_view()
+def menu_item(request, menuId):
+    items = get_object_or_404(MenuItem, pk=menuId)
+    serializer_items = MenuItemSerializers(items)
+    return Response(serializer_items.data, status=status.HTTP_200_OK)
 
 class BookList(APIView):
     def get(self, request):

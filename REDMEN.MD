@@ -89,3 +89,8 @@
    2. less code duplication, 
    3. can extend the clusters and add features that anytime.
    4. can write specific methods for each type of HTTP request.
+
+
+## serializers
+ - serializers helped to convert model instances into Python datatypes that can be displayed as JSON or XML.
+ -  It also helps you to convert HTTP request body into Python datatypes and made them to a model instance.

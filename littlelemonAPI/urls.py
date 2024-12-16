@@ -5,6 +5,13 @@ urlpatterns = [
     # path('books',views.books, name='books'),
     path('books',views.BookList.as_view()),
     path('books/<int:pk>',views.Book.as_view()),
+    path('menu-items', views.MenuItemView.as_view()),
+    path('menu-items/<int:pk>', views.SingleMenuItemView.as_view()),
+
+    path('book-items', views.menu_items),
+    path('book-items/<int:menuId>', views.menu_item),
+
+
 
     # path('books', views.BookView.as_view(
     #     {
