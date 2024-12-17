@@ -6,6 +6,9 @@ name = "pypi"
 [packages]
 djangorestframework = "*"
 django-debug-toolbar = "*"
+djangorestframework-yaml = "*"
+djangorestframework-csv = "*"
+djangorestframework-xml = "*"
 
 [dev-packages]
 
